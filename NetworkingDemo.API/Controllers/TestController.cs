@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
+﻿using NetworkingDemo.API.DTOs;
+using Microsoft.AspNetCore.Mvc;
 
 namespace NetworkingDemo.API.Controllers
 {
@@ -52,12 +52,5 @@ namespace NetworkingDemo.API.Controllers
             if (id <= 0) return BadRequest("Id must be greater than zero");
             return Ok("Deleted successfully");
         }
-    }
-
-    public class UserDto
-    {
-        [Required]
-        public string Name { get; set; } = null!;
-        public string Email { get; set; } = null!;
     }
 }

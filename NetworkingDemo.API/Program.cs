@@ -1,6 +1,7 @@
 using System.Text;
 using Microsoft.OpenApi.Models;
 using Microsoft.IdentityModel.Tokens;
+using NetworkingDemo.API.Middlewares;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -71,6 +72,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseMiddleware<RequestLoggingMiddleware>();
+app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseHttpsRedirection();
 app.UseCors("AllowFrontend");
 app.UseAuthentication();

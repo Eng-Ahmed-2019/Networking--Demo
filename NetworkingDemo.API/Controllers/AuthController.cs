@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Security.Claims;
+using NetworkingDemo.API.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -18,11 +19,13 @@ namespace NetworkingDemo.API.Controllers
         }
 
         [HttpPost("login")]
-        public IActionResult Login()
+        public IActionResult Login([FromBody] LoginDto dto)
         {
+            if (dto.UserName != "Admin" && dto.Password != "123") return Unauthorized("Invalid UserName or Password");
+
             var Claims = new[]
             {
-                new Claim(ClaimTypes.Name,"Ahmed"),
+                new Claim(ClaimTypes.Name,dto.UserName),
                 new Claim(ClaimTypes.Role,"Admin")
             };
 
